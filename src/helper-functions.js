@@ -30,7 +30,7 @@ export const getOrderedDataSet = (filteredDataSet) => {
 };
 
 export const removeUnwantedProperties = (orderedDataSet) =>
-  orderedDataSet.reduce((accum, _item) => {
+  orderedDataSet.map((_item) => {
     const {
       flight_number,
       mission_name,
@@ -38,11 +38,9 @@ export const removeUnwantedProperties = (orderedDataSet) =>
         second_stage: { payloads },
       },
     } = _item;
-
-    accum.push({
+    return {
       flight_number,
       mission_name,
       payloads_count: payloads.length,
-    });
-    return accum;
-  }, []);
+    };
+  });
